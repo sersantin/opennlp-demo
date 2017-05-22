@@ -14,31 +14,27 @@ public final class AuxTokenizer {
 
     private AuxTokenizer() { }
 
-    public static void tokenize(final String s) {
-        InputStream modelIn = null;
-        try {
-            modelIn = new FileInputStream(AuxTokenizer.ENGLISH_MODEL_PATH);
-            TokenizerModel model = new TokenizerModel(modelIn);
-            Tokenizer tokenizer = new TokenizerME(model);
+    public static String[] tokenize(final String s) {
 
-            String[] tokens = tokenizer.tokenize(s);
-            for (String token : tokens) {
-                System.out.println(token);
-            }
+     InputStream modelIn = null;
+     String[] tokens = new String[0];
+     String inputString = s;
+     if (inputString == null) {
+        inputString = "";
+     }
+     try {
+        modelIn = new FileInputStream(AuxTokenizer.ENGLISH_MODEL_PATH);
+        TokenizerModel model = new TokenizerModel( modelIn );
+        Tokenizer tokenizer = new TokenizerME(model);
+        tokens = tokenizer.tokenize(inputString);
         } catch (final FileNotFoundException e) {
             e.printStackTrace();
         } catch (final IOException ioe) {
             ioe.printStackTrace();
-        } finally {
-            if (modelIn != null) {
-                try {
-                    modelIn.close();
-                } catch (final IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            System.out.println("\n-----\ndone");
         }
+
+        return tokens;
+
     }
 }
 
