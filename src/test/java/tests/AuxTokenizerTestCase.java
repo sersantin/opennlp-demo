@@ -35,6 +35,6 @@ public class AuxTokenizerTestCase extends TestCase {
                 "For truth proves thievish for a prize so dear.";
         String[] tokens = AuxTokenizer.tokenize(inputText);
 
-        assertEquals(117, tokens.length);
+        assertEquals(135, tokens.length);
     }
 }
